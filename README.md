@@ -1,0 +1,2 @@
+# clea_cpu_monitoring_zephyr
+clea_cpu_monitoring_zephyr
