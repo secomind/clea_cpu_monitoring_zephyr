@@ -175,7 +175,10 @@ int main(void)
     k_timer_start(&cpu_usage_timer, K_SECONDS(5), K_SECONDS(5));
 
     // Wait for a predefined operational time.
-    k_timepoint_t finish_timepoint = sys_timepoint_calc(K_SECONDS(CONFIG_SAMPLE_DURATION_SECONDS));
+    k_timeout_t finish_timeout = (CONFIG_SAMPLE_DURATION_SECONDS == 0)
+        ? K_FOREVER
+        : K_SECONDS(CONFIG_SAMPLE_DURATION_SECONDS);
+    k_timepoint_t finish_timepoint = sys_timepoint_calc(finish_timeout);
     while (!K_TIMEOUT_EQ(sys_timepoint_timeout(finish_timepoint), K_NO_WAIT)) {
         k_timepoint_t timepoint = sys_timepoint_calc(K_MSEC(MAIN_THREAD_PERIOD_MS));
         // Ensure the connectivity is still present

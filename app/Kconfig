@@ -18,10 +18,10 @@ config ASTARTE_CREDENTIAL_SECRET
 
 config SAMPLE_DURATION_SECONDS
     int "Sample maximum duration (s)"
-    default 600
+    default 0
     help
         Use this setting to change for how long the sample will run.
-        The default is four minutes.
+        When set to 0 the sample will run indefinitely.
 
 endmenu
 
