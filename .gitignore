@@ -1,0 +1,24 @@
+# Copyright 2025 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# editors
+.vscode
+*.swp
+*~
+.idea
+
+# python
+.venv
+__pycache__/
+
+# build
+build*
+twister-out*
+cmake-build-*/
+
+# cache
+.cache
+
+# samples private conf used to store secrets like wifi passwords and credential secrets
+app/private.conf

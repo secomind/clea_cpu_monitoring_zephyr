@@ -1,0 +1,30 @@
+menu "Zephyr"
+source "Kconfig.zephyr"
+endmenu
+
+menu "CPU metrics sample application"
+
+config ASTARTE_DEVICE_ID
+	string "Astarte device ID"
+    default ""
+	help
+	  Device ID to be used to connect to Astarte.
+
+config ASTARTE_CREDENTIAL_SECRET
+    string "Astarte credential secret"
+    default ""
+    help
+        The credential secret to be used to connect to Astarte.
+
+config SAMPLE_DURATION_SECONDS
+    int "Sample maximum duration (s)"
+    default 0
+    help
+        Use this setting to change for how long the sample will run.
+        When set to 0 the sample will run indefinitely.
+
+endmenu
+
+module = APP
+module-str = APP
+source "subsys/logging/Kconfig.template.log_config"
