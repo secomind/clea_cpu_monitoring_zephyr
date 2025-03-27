@@ -73,11 +73,15 @@ The simplest way to try Clea is by requesting an evalutation account by filling 
 form at https://clea.ai/contact. Once the account request is submitted, you will receive the
 credentials and access links to the platform via email.
 
+![Registration form for the Clea platform.](/doc/images/clea_registration.png)
+
 Once you got your evaluation account you can log in to the Clea administration panel using the
 credentials provided via email, select the available tenant, and access its dedicated dashboard.
 The dashboard provides general information about the tenant, references to the Edgehog
 and Astarte components, and links to documentation resources. From this page record the *Astarte API
 URL* and the *Astarte Realm*.
+
+![Clea admin panel.](/doc/images/clea_admin_panel.png)
 
 Navigate into Astarte section and select the devices section. Click register a new device, generate
 a random ID with the provided button and then register the device.
@@ -85,7 +89,51 @@ Store the following information for later:
 - Device ID
 - Device credential secret
 
-### 3.2 Configuring the CPU monitoring application
+![Device registration page.](/doc/images/device_registration.png)
+
+### 3.2 Installing the sample interfaces in Clea
+
+This device will use two custom interfaces that need to be installed on Clea for the device to
+connect correctly. You can find the interfaces definition for this app in the `app/interfaces`
+folder, the definition are contained in two JSON files.
+
+Navigate to the Astarte interfaces section and click on *Install a new interface*.
+Copy and paste the interface definition, the content of the JSON file, to the box on the right side
+and click *Install interface*. Repeat this for both interfaces.
+
+![Interface installation.](/doc/images/interface_installation.png)
+
+### 3.3 Creating the application
+
+You can now create an application on the Clea portal. This application will display the data
+received from the device and plot it in a couple of graphs.
+
+Navigate to the portal section and then under applications select create application.
+Insert a name and slug of your choice. Add the two interfaces you installed in the previous step in
+the required Astarte interfaces section. Then add a source URL where the application can be fetched.
+We include the application JavaScript source file in this repository in the `portal/main.mjs`
+folder. However, you will need to self host the file and make it available to the portal
+application. It will need to be accessible through TLS and support Cross-origin resource sharing
+(CORS).
+
+![Application creation.](/doc/images/application_creation.png)
+
+### 3.4 Creating an organization and accessing portal
+
+We should now create an organization and invite at least one user. The invited user will then have
+access to the user portal panel and will visualize the data uploaded by the device.
+
+Navigate to the portal section and under organizations select create organization.
+Choose a name for your organization and add one email for a user that will have access to the portal
+user panel. Then click on create organization.
+
+![Organization creation.](/doc/images/organization_creation.png)
+
+You will receive an email with an invite link to portal and you will be required to create a new
+password to access the portal page. For now the portal page will show an empty appliance list as
+we haven't yet flashed the sample on the board.
+
+### 3.5 Configuring the CPU monitoring application
 
 We will now configure the application so that once flashed to the device it will know how to
 authenticate itself to Clea.
@@ -107,10 +155,16 @@ device ID and `<CREDENTIAL_SECRET>` is the device credential secret obtained dur
 
 Upon running the code the demo application will display on the serial monitor its progression.
 The device will first connect to Clea using the credential secret, once the device is connected it
-will appear in the Clea dashboard in both the Astarte and Edgehog sections and the user will be able
-to interact with it.
+will appear in the Clea admin page in both the Astarte and Edgehog sections and the user will be
+able to interact with it.
 For example, an OTA update can be performed. You will first need to locate the binary generated
-during the build process and then trigger the update procedure using the dashboard.
+during the build process and then trigger the update procedure using the admin panel.
+
+Furthermore, in the Clea portal user panel a new appliance will have appeared. If you select it
+it will automatically display the application we installed in the previous steps with a couple of
+graphs for some CPU statistics.
+
+![Connected appliance view.](/doc/images/appliance.png)
 
 ## 5. Support<a name="step5"></a>
 
